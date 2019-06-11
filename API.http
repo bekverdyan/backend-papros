@@ -1,0 +1,16 @@
+###
+GET http://localhost:3000
+
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "bekor@bk.ru",
+    "password": "qaqik123"
+}
+
+###
+POST http://localhost:3000/shfunc
+Content-Type: application/json
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjAyODQ4MjksImV4cCI6MTU2MDI4NDk0OSwic3ViIjoiZ2FnbyJ9.num1BdoUZSPPbAFPp-w_CqwrlbzxNgBymY1DMmu5qiIYVRRuJXKRY7G-m3ibmE0Vl0WSUDk5iuWuyqHa1h3mSnET4h0184p7NRULbmIMUiYvtSFrqakaYoQ4_ZoD28ewePhOw1IbNy0Y0zGo7gWJu8ZC5V_m2vsnA-FCIEtnjjc
