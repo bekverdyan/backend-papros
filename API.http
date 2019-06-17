@@ -1,8 +1,8 @@
-###
-GET http://localhost:3000
+@host = http://localhost:3000
+@token = {{obtainToken.response.body.$.token}}
 
-###
-POST http://localhost:3000/api/login
+# @name obtainToken
+POST {{host}}/api/login
 Content-Type: application/json
 
 {
@@ -11,6 +11,9 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/shfunc
+GET {{host}}
+
+###
+POST {{host}}/shfunc
 Content-Type: application/json
-Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjAyODQ4MjksImV4cCI6MTU2MDI4NDk0OSwic3ViIjoiZ2FnbyJ9.num1BdoUZSPPbAFPp-w_CqwrlbzxNgBymY1DMmu5qiIYVRRuJXKRY7G-m3ibmE0Vl0WSUDk5iuWuyqHa1h3mSnET4h0184p7NRULbmIMUiYvtSFrqakaYoQ4_ZoD28ewePhOw1IbNy0Y0zGo7gWJu8ZC5V_m2vsnA-FCIEtnjjc
+Authorization: {{token}}
