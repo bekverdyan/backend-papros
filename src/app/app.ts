@@ -3,6 +3,8 @@ import express, { Application, Request, Response } from 'express';
 import * as fs from 'fs';
 // import cookieParser from 'cookie-parser';
 import * as jwt from 'jsonwebtoken';
+import { Users } from './static-data';
+import { User } from './user';
 
 const app: Application = express();
 
@@ -59,12 +61,9 @@ export function loginRoute(req: Request, res: Response) {
   }
 }
 
-export function validateEmailAndPassword(email: string, password: string) {
-  if (email === 'bekor@bk.ru') {
-    return true;
-  } else {
-    return false;
-  }
+export function validateEmailAndPassword(email: string, password: string): User {
+  const usersik = new Users();
+  return usersik.authenticate(email, password);
 }
 
 export function findUserIdForEmail(email: string) {

@@ -6,8 +6,8 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-    "email": "bekor@bk.ru",
-    "password": "qaqik123"
+    "email": "krolik",
+    "password": "asd"
 }
 
 ###
