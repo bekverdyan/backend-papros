@@ -8,6 +8,12 @@ import { User } from './user';
 
 const app: Application = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(bodyParser.json());
 
 app.route('/api/login')
@@ -25,14 +31,17 @@ const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
 export function shfuntikInformation(req: Request, res: Response) {
 
   // TODO handle verification cases carefuly
-  const token = req.headers.authorization;
+  const token = req.headers.authorization === undefined ? '' : req.headers.authorization;
 
   const decoded = jwt.verify(token, RSA_PUBLIC_KEY);
 
   if (decoded == undefined) {
     res.sendStatus(401);
   } else {
-    res.send(decoded);
+    const users: Users = new Users();
+    res.send({
+      usersList: users
+    });
   }
 }
 
