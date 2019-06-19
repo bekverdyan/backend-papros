@@ -19,6 +19,12 @@ export class Users {
     })
   }
 
+  public findByEmail(email: string): User[] {
+    return this.user.filter((element, index, array) => {
+      return (element.name === email);
+    })
+  }
+
   /**
    * listUsers
    */
@@ -28,13 +34,13 @@ export class Users {
 
   private user = new Array<User>(
     new User(),
-    new User('3646qelverc'),
-    new User('574707', 'nemo', 'asd'),
-    new User('34bg98', 'gago', 'asd'),
-    new User('d4r9j4', 'popok', 'asd'),
-    new User('0okm7y', 'krolik', 'asd'),
-    new User('e3dr8u', 'zubik', 'asd'),
-    new User('z2d04h', 'savok', 'asd'),
-    new User('fg7yr9', 'harthuk', 'asd')
+    new User('3646qe'),
+    new User('574707', 'nemo@xunk.ru', 'asd'),
+    new User('34bg98', 'gago@xunk.ru', 'asd'),
+    new User('d4r9j4', 'popok@xunk.ru', 'asd'),
+    new User('0okm7y', 'krolik@xunk.ru', 'asd'),
+    new User('e3dr8u', 'zubik@xunk.ru', 'asd'),
+    new User('z2d04h', 'savok@xunk.ru', 'asd'),
+    new User('fg7yr9', 'harthuk@xunk.ru', 'asd')
   );
 }

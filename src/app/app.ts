@@ -9,8 +9,8 @@ import { User } from './user';
 const app: Application = express();
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -23,24 +23,29 @@ app.get('/', function (req, res) {
   res.send('Hello world');
 });
 
-app.route('/shfunc').post(shfuntikInformation);
+app.route('/api/users/list').get(listUsers);
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./demos/private.key');
 const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
 
-export function shfuntikInformation(req: Request, res: Response) {
+export function isAuthenticated(req: Request, res: Response): string | boolean {
+  const token = req.headers.authorization === undefined ? '' : req.headers.authorization;
+  const decoded = jwt.verify(token, RSA_PUBLIC_KEY);
+console.log(decoded);
+  return decoded === undefined ? false : decoded.toString();
+}
+
+export function listUsers(req: Request, res: Response) {
 
   // TODO handle verification cases carefuly
-  const token = req.headers.authorization === undefined ? '' : req.headers.authorization;
-
-  const decoded = jwt.verify(token, RSA_PUBLIC_KEY);
-
-  if (decoded == undefined) {
+  const authenticated  = isAuthenticated(req, res);
+ console.log(authenticated);
+  if (!authenticated) {
     res.sendStatus(401);
   } else {
-    const users: Users = new Users();
+    const users: User[] = (new Users()).listUsers();
     res.send({
-      usersList: users
+      users
     });
   }
 }
@@ -75,8 +80,9 @@ export function validateEmailAndPassword(email: string, password: string): User 
   return usersik.authenticate(email, password);
 }
 
-export function findUserIdForEmail(email: string) {
-  return 'gago';
+export function findUserIdForEmail(email: string): string {
+  const userner = new Users();
+  return userner.findByEmail(email)[0].id;
 }
 
 app.listen(3000, function () {
