@@ -6,7 +6,7 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-  "email": "krolik",
+  "email": "krolik@xunk.ru",
   "password": "asd"
 }
 
@@ -14,6 +14,6 @@ Content-Type: application/json
 GET {{host}}
 
 ###
-POST {{host}}/shfunc
+GET {{host}}/api/users/list
 Content-Type: application/json
 Authorization: {{token}}
