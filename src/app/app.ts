@@ -44,9 +44,7 @@ export function listUsers(req: Request, res: Response) {
     res.sendStatus(401);
   } else {
     const users: User[] = (new Users()).listUsers();
-    res.send({
-      users
-    });
+    res.send(users);
   }
 }
 
