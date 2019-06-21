@@ -8,7 +8,7 @@ import { User } from './user';
 
 const app: Application = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
@@ -31,15 +31,15 @@ const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
 export function isAuthenticated(req: Request, res: Response): string | boolean {
   const token = req.headers.authorization === undefined ? '' : req.headers.authorization;
   const decoded = jwt.verify(token, RSA_PUBLIC_KEY);
-console.log(decoded);
+
   return decoded === undefined ? false : decoded.toString();
 }
 
 export function listUsers(req: Request, res: Response) {
 
   // TODO handle verification cases carefuly
-  const authenticated  = isAuthenticated(req, res);
- console.log(authenticated);
+  const authenticated = isAuthenticated(req, res);
+
   if (!authenticated) {
     res.sendStatus(401);
   } else {
@@ -84,5 +84,5 @@ export function findUserIdForEmail(email: string): string {
 }
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000');
+  console.log('Papros listening on port 3000');
 })
